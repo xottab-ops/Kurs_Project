@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 
 namespace Kurs_Project
@@ -7,7 +8,7 @@ namespace Kurs_Project
     {
         private Hash hashTable = new Hash(10);
         private Avl AvlTree = new Avl();
-        private List<ReportStruct> _reportStruct = new List<ReportStruct>();
+        private LinkedList<ReportStruct> _reportStruct = new LinkedList<ReportStruct>();
         public MainWindow()
         {
             InitializeComponent();
@@ -109,20 +110,21 @@ namespace Kurs_Project
         // АВЛ ДЕРЕВО РАБОТА С ДЕРЕВОМ
         public void ButtonSearch2Sprav_Click(object sender, RoutedEventArgs e)
         {
-            List<Table2> listAvl = new List<Table2>();
-            Avl.AvlToList(AvlTree.Root, listAvl);
+            LinkedList<Table2> listAvl = new LinkedList<Table2>();
+            listAvl = AvlTree.AvlToList();
             Table2[] tab = listAvl.Getter();
+            
             SearchTable2.ItemsSource = tab;
         }
 
         public void DebugAvl_Click(object sender, RoutedEventArgs e)
         {
             DebugAvlText.Text = "";
-            List<string> DisplayString = new List<string>();;
+            LinkedList<string> DisplayString = new LinkedList<string>();;
             DisplayString = AvlTree.DisplayTree();
-            for (int i = 0; i < DisplayString.Capacity; i++)
+            foreach (var i in DisplayString)
             {
-                DebugAvlText.Text += DisplayString[i]+"\r\n";
+                DebugAvlText.Text += i+"\r\n";
             }
         }
 
@@ -178,9 +180,9 @@ namespace Kurs_Project
                     return;
                 }
                 Table2 tempDel = Inits.InitTable2(LoginTo2Remove.Text, NamingOfObjectRemove.Text, prRemove, CategorySearchRemove.Text);
-                List<Table2> tempTab = new List<Table2>();
-                Avl.AvlToList(AvlTree.Root, tempTab);
-                if (tempTab.IndexOf(tempDel) == -1)
+                LinkedList<Table2> tempTab = new LinkedList<Table2>();
+                tempTab = AvlTree.Find(tempDel.Category);
+                if (tempTab.Contains(tempDel) == false)
                 {
                     MessageBox.Show(errors.mistake6);
                     return;
@@ -251,10 +253,12 @@ namespace Kurs_Project
                 return;
             }
             _reportStruct = Report.MakeReport(hashTable, AvlTree, CategorySearch.Text, raiting1, raiting2);
-            ReportStruct[] tempRep = new ReportStruct[_reportStruct.Capacity];
-            for (int i = 0; i < _reportStruct.Count; i++)
+            ReportStruct[] tempRep = new ReportStruct[_reportStruct.Count];
+            int k = 0;
+            foreach (var i in _reportStruct)
             {
-                tempRep[i] = _reportStruct[i];
+                tempRep[k] = i;
+                k++;
             }
             mainSearchTable.ItemsSource = tempRep;
         }
@@ -277,10 +281,11 @@ namespace Kurs_Project
         public void DebugTempStruct_Click(object sender, RoutedEventArgs e)
         {
             DebugTempStructText.Text = "";
-            for (int i = 0; i < _reportStruct.Count; i++)
+            foreach (var i in _reportStruct)
             {
-                DebugTempStructText.Text += _reportStruct[i].ToString();
+                DebugTempStructText.Text += i.ToString();
             }
+            
         }
         
     }

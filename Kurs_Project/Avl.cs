@@ -1,30 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace Kurs_Project
 {
     public class Avl
     {
         public class Node
-                {
-                    public List<Table2> Data = new List<Table2>();
-                    public Node Left;
-                    public Node Right;
-                    public Node(Table2 data)
-                    {
-                        this.Data.AddFirst(data);
-                    }
-                }
+        {
+            public LinkedList<Table2> Data = new LinkedList<Table2>();
+            public Node Left;
+            public Node Right;
+            public Node(Table2 data)
+            {
+                this.Data.Add(data);
+            }
+        }
         
                 public Node Root;
-        
-                public static void AvlToList(Node tree, List<Table2> mainList)
+                public int Count = 0;
+                public LinkedList<Table2> AvlToList()
                 {
-                    if (tree != null)
+                    LinkedList<Table2> temp = new LinkedList<Table2>();
+                    if (Root == null)
                     {
-                        AvlToList(tree.Left, mainList);
-                        AvlToList(tree.Right, mainList);
-                        mainList.AddListInList(tree.Data);
+                        return temp;
+                    }
+                    InOrderDisplayTree(Root, temp);
+                    return temp;
+                }
+                
+                private void InOrderDisplayTree(Node current, LinkedList<Table2> stringing)
+                {
+                    if (current != null)
+                    {
+                        InOrderDisplayTree(current.Left, stringing);
+                        foreach (var add in current.Data)
+                        {
+                            stringing.Add(add);
+                        }
+                        InOrderDisplayTree(current.Right, stringing);
                     }
                 }
+                
+                
                 public void Add(Table2 data)
                 {
                     Node newItem = new Node(data);
@@ -36,6 +54,8 @@ namespace Kurs_Project
                     {
                         Root = RecursiveInsert(Root, newItem);
                     }
+
+                    Count++;
                 }
                 private Node RecursiveInsert(Node current, Node n)
                 {
@@ -44,19 +64,19 @@ namespace Kurs_Project
                         current = n;
                         return current;
                     }
-                    else if (String.CompareOrdinal(n.Data[0].Category,current.Data[0].Category) < 0)
+                    else if (String.CompareOrdinal(n.Data.returnFirst().Category,current.Data.returnFirst().Category) < 0)
                     {
                         current.Left = RecursiveInsert(current.Left, n);
                         current = balance_tree(current);
                     }
-                    else if (String.CompareOrdinal(n.Data[0].Category,current.Data[0].Category) > 0)
+                    else if (String.CompareOrdinal(n.Data.returnFirst().Category,current.Data.returnFirst().Category) > 0)
                     {
                         current.Right = RecursiveInsert(current.Right, n);
                         current = balance_tree(current);
                     }
-                    else if (String.CompareOrdinal(n.Data[0].Category,current.Data[0].Category) == 0)
+                    else if (String.CompareOrdinal(n.Data.returnFirst().Category,current.Data.returnFirst().Category) == 0)
                     {
-                        current.Data.AddFirst(n.Data[0]); 
+                        current.Data.Add(n.Data.returnFirst()); 
                     }
                     return current;
                 }
@@ -99,6 +119,8 @@ namespace Kurs_Project
                     {
                         temp2.Data.Remove(target);
                     }
+
+                    Count--;
                 }
                 
                 
@@ -108,7 +130,7 @@ namespace Kurs_Project
                     { return null; }
                     else
                     {
-                        if (String.CompareOrdinal(target,current.Data[0].Category) < 0)
+                        if (String.CompareOrdinal(target,current.Data.returnFirst().Category) < 0)
                         {
                             current.Left = Delete(current.Left, target);
                             if (balance_factor(current) == -2)
@@ -124,7 +146,7 @@ namespace Kurs_Project
                             }
                         }
                         //right subtree
-                        else if (String.CompareOrdinal(target,current.Data[0].Category) > 0)
+                        else if (String.CompareOrdinal(target,current.Data.returnFirst().Category) > 0)
                         {
                             current.Right = Delete(current.Right, target);
                             if (balance_factor(current) == 2)
@@ -149,7 +171,7 @@ namespace Kurs_Project
                                     parent = parent.Left;
                                 }
                                 current.Data = parent.Data;
-                                current.Right = Delete(current.Right, parent.Data[0].Category);
+                                current.Right = Delete(current.Right, parent.Data.returnFirst().Category);
                                 if (balance_factor(current) == 2)
                                 {
                                     if (balance_factor(current.Left) >= 0)
@@ -172,41 +194,41 @@ namespace Kurs_Project
                     return current;
                 }
 
-                public List<Table2> Find(string key)
+                public LinkedList<Table2> Find(string key)
                 {
                     if (Find(key, Root) == null)
                     {
-                        return new List<Table2>();
+                        return new LinkedList<Table2>();
                         
                     }
-                    if (Find(key, Root).Data[0].Category == key)
+                    if (Find(key, Root).Data.returnFirst().Category == key)
                     {
                         return Find(key, Root).Data;
                     }
                     else
                     {
-                        return new List<Table2>();
+                        return new LinkedList<Table2>();
                     }
-                    return new List<Table2>();
+                    return new LinkedList<Table2>();
                 }
-                public List<string> DisplayTree()
+                public LinkedList<string> DisplayTree()
                 {
-                    List<string> temp = new List<string>();
+                    LinkedList<string> temp = new LinkedList<string>();
                     if (Root == null)
                     {
                         string tempStr = "Дерево пустое";
-                        temp.AddFirst(tempStr);
+                        temp.Add(tempStr);
                         return temp;
                     }
                     InOrderDisplayTree(Root, temp);
                     return temp;
                 }
-                private void InOrderDisplayTree(Node current, List<string> stringing)
+                private void InOrderDisplayTree(Node current, LinkedList<string> stringing)
                 {
                     if (current != null)
                     {
                         InOrderDisplayTree(current.Left, stringing);
-                        stringing.AddFirst(current.Data.GetStringRepresentation());
+                        stringing.Add(current.Data.GetStringRepresentation());
                         InOrderDisplayTree(current.Right, stringing);
                     }
                 }
@@ -216,11 +238,11 @@ namespace Kurs_Project
                     {
                         return null;
                     }
-                    if (String.CompareOrdinal(target,current.Data[0].Category) == 0)
+                    if (String.CompareOrdinal(target,current.Data.returnFirst().Category) == 0)
                     {
                         return current;
                     }
-                    if (String.CompareOrdinal(target,current.Data[0].Category) < 0)
+                    if (String.CompareOrdinal(target,current.Data.returnFirst().Category) < 0)
                     {
                         return Find(target, current.Left);
                     }
