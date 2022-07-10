@@ -1,0 +1,16 @@
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\bin\Debug\Kurs_Project.exe.config
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\bin\Debug\Kurs_Project.exe
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\bin\Debug\Kurs_Project.pdb
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.csproj.AssemblyReference.cache
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\MainWindow.g.cs
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\App.g.cs
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project_MarkupCompile.cache
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project_MarkupCompile.lref
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\MainWindow.baml
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.g.resources
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.Properties.Resources.resources
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.csproj.GenerateResource.cache
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.csproj.CoreCompileInputs.cache
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.exe
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.pdb
+C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\obj\Debug\Kurs_Project.csproj.SuggestedBindingRedirects.cache

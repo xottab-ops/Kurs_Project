@@ -1,0 +1,446 @@
+﻿<Window x:Class="Kurs_Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kurs_Project"
+        xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+        mc:Ignorable="d"
+        
+        Title="Курсовая работа" Height="360" Width="640" Icon="C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\beer.ico">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl>
+            <TabItem Header = "Приветствие">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" TextAlignment="Center" FontSize="20">
+                    Курсовой проект на тему: 
+                    <LineBreak />
+                    Разработка информационной системы 
+                    <LineBreak />
+                    для автоматизации работы со справочниками 
+                    <LineBreak />
+                    предметной области проекта «Торговая площадка игры»
+                    <LineBreak />
+                    <LineBreak />
+                    <LineBreak />
+                    Разработал: студент 2 курса
+                    <LineBreak />
+                    Б9120-09.03.04прогин
+                    <LineBreak />
+                    Решетнев Никита Ярославович
+                </TextBlock>
+            </TabItem>
+                <TabItem Header="Справочник Продавцы">
+                <TabControl>
+                    <TabItem Header="Отображение справочника">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="ButtonSearch1Sprav" Grid.Column="1" Grid.Row="0" Content="Найти" Click="ButtonSearch1Sprav_Click" MaxHeight="30"></Button>
+                            <DataGrid Grid.Row="1" Grid.ColumnSpan="3" x:Name="SearchTable1" AutoGenerateColumns="False" IsReadOnly="True">
+                                <DataGrid.Resources>
+                            
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Логин" Binding="{Binding Path= Login}" Width="150" />
+                                    <DataGridTextColumn Header="Количество продаж" Binding="{Binding Path=CountOfSell}" Width="100" />
+                                    <DataGridTextColumn Header="Рейтинг" Binding="{Binding Path=Rating}" Width="60" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Добавление записи">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>  
+                            <TextBlock Grid.Row="0" Grid.Column="0">
+                                Логин
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0">
+                                Кол-во продаж
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0">
+                                Рейтинг
+                            </TextBlock>
+                            <TextBox x:Name="LoginTo1" Grid.Row="0" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                            >
+                                jassik23
+                            </TextBox>
+                            <TextBox x:Name="CountOfSell" Grid.Row="1" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                            >
+                                213331
+                            </TextBox> 
+                            <TextBox MaxLength="4" x:Name="Rating" Grid.Row="2" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                            >
+                                5
+                            </TextBox> 
+                            <Button Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Height="80" x:Name="AddingTo1" Width="60" Click="AddingTo1_Click"
+                                    Content="Добавить"
+                            />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Удаление записи">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="4*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Row="1" Height="30" Width="350" x:Name="DeleteFromTable1"></TextBox>
+                            <TextBlock Height="40" TextAlignment="Center" FontSize="30">
+                                Введите логин, который хотите удалить!
+                            </TextBlock>
+                            <Button Grid.Row="2" HorizontalAlignment="Center" MaxHeight="30" x:Name="DeleteButton1" Width="300" Click="DeleteButton1_Click">
+                                Удалить
+                            </Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Загрузить и сохранить">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="1" MaxHeight="30" Content="Загрузить" x:Name="LoadTable1" Click="LoadTable1_Click" ></Button>
+                            <Button Grid.Row="2" Grid.Column="1" MaxHeight="30" Content="Сохранить" x:Name="SaveTable1" Click="SaveTable1_Click" ></Button>
+                            <TextBox Grid.Column="1" Grid.Row="0" x:Name="TextBlockFile1" MaxHeight="30">Введите название файла</TextBox>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Отладка">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="1" Height="30" Content="Отладить" x:Name="DebugHash" Click="DebugHash_Click"></Button>
+                            <TextBox TextAlignment="Center" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugHashText" IsReadOnly="True"></TextBox>
+                    
+                    
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header="Справочник Продажи" >
+                <TabControl>
+                    <TabItem Header="Отображение справочника">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="ButtonSearch2Sprav" Grid.Column="1" Grid.Row="0" Content="Найти" MaxHeight="30" Click="ButtonSearch2Sprav_Click"></Button>
+                            <DataGrid Grid.Row="1" Grid.ColumnSpan="3" IsReadOnly="True" x:Name="SearchTable2" AutoGenerateColumns="False" ItemsSource="{DynamicResource ResourceKey=phones}">
+                                <DataGrid.Resources>
+                            
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Логин" Binding="{Binding Path=Login}" Width="150" />
+                                    <DataGridTextColumn Header="Название предмета" Binding="{Binding Path=Naming}" Width="200" />
+                                    <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="100" />
+                                    <DataGridTextColumn Header="Категория предмета" Binding="{Binding Path=Category}" Width="200" /> 
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Добавление записи">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>  
+                            <TextBlock Grid.Row="0" Grid.Column="0">
+                                Логин
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0">
+                                Название предмета
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0">
+                                Стоймость предмета
+                            </TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0">
+                                Категория предмета
+                            </TextBlock>
+                            <TextBox x:Name="LoginTo2" Grid.Row="0" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                            >
+                                jassik23
+                            </TextBox>
+                            <TextBox x:Name="NamingOfObject" Grid.Row="1" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                                     
+                            >
+                                Красная пыль
+                            </TextBox> 
+                            <TextBox x:Name="PriceOfObject" Grid.Row="2" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                                     
+                            >
+                                200
+                            </TextBox> 
+                            <ComboBox x:Name="CategorySearchAdd" Grid.Row="3" Grid.Column="1" Height="30">
+                                <TextBlock>Красный</TextBlock>
+                                <TextBlock>Оранжевый</TextBlock>
+                                <TextBlock>Жёлтый</TextBlock>
+                                <TextBlock>Зелёный</TextBlock>
+                                <TextBlock>Голубой</TextBlock>
+                                <TextBlock>Синий</TextBlock>
+                                <TextBlock>Фиолетовый</TextBlock>
+                            </ComboBox>
+                            <Button Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Height="80" x:Name="AddingTo2" Width="60" Click="AddingTo2_Click"
+                                    Content="Добавить"
+                            />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Удаление записи">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>  
+                            
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0">
+                                Логин
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0">
+                                Название предмета
+                            </TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0">
+                                Стоймость предмета
+                            </TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0">
+                                Категория предмета
+                            </TextBlock>
+                            <TextBox x:Name="LoginTo2Remove" Grid.Row="0" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                            >
+                                jassik23
+                            </TextBox>
+                            <TextBox x:Name="NamingOfObjectRemove" Grid.Row="1" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                                     
+                            >
+                                Красная пыль
+                            </TextBox> 
+                            <TextBox x:Name="PriceOfObjectRemove" Grid.Row="2" Grid.Column="1" 
+                                     AcceptsReturn="True" 
+                                     Height="30" 
+                                     
+                            >
+                                200
+                            </TextBox> 
+                            <ComboBox x:Name="CategorySearchRemove" Grid.Row="3" Grid.Column="1" Height="30">
+                                <TextBlock>Красный</TextBlock>
+                                <TextBlock>Оранжевый</TextBlock>
+                                <TextBlock>Жёлтый</TextBlock>
+                                <TextBlock>Зелёный</TextBlock>
+                                <TextBlock>Голубой</TextBlock>
+                                <TextBlock>Синий</TextBlock>
+                                <TextBlock>Фиолетовый</TextBlock>
+                            </ComboBox>
+                            <Button Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Height="70" x:Name="RemoveTo2" Width="60" Click="RemoveTo2_Click"
+                                    Content="Удалить"
+                            />
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Загрузить и сохранить">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="1" Grid.Column="1" MaxHeight="30" Content="Загрузить" x:Name="LoadTable2" Click="LoadTable2_Click"></Button>
+                            <Button Grid.Row="2" Grid.Column="1" MaxHeight="30" Content="Сохранить" x:Name="SaveTable2" Click="SaveTable2_Click"></Button>
+                            <TextBox Grid.Column="1" Grid.Row="0" x:Name="TextBlockFile2" MaxHeight="30">Введите название файла</TextBox>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Отладка">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="1" Height="30" Content="Отладить" x:Name="DebugAvl" Click="DebugAvl_Click"></Button>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugAvlText" IsReadOnly="True" VerticalScrollBarVisibility="Auto"></TextBox>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </TabItem>
+            <TabItem Header = "Отчет 'Магазин'">
+                <TabControl>
+                    <TabItem Header="Показ отчета">
+                    <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox x:Name="intervalMin" Grid.Row="0" Grid.Column="0" 
+                             AcceptsReturn="True" 
+                             Height="20" 
+                             Width="50"
+                            >
+                        2
+                    </TextBox>
+                    <TextBox x:Name="intervalMax" Grid.Row="0" Grid.Column="1" 
+                             AcceptsReturn="True" 
+                             Height="20" 
+                             Width="50"
+                             >
+                        5
+                    </TextBox>  
+                    <ComboBox x:Name="CategorySearch" Grid.Row="0" Grid.Column="2" Height="20" Width="150">
+                        <TextBlock>Красный</TextBlock>
+                        <TextBlock>Оранжевый</TextBlock>
+                        <TextBlock>Жёлтый</TextBlock>
+                        <TextBlock>Зелёный</TextBlock>
+                        <TextBlock>Голубой</TextBlock>
+                        <TextBlock>Синий</TextBlock>
+                        <TextBlock>Фиолетовый</TextBlock>
+                    </ComboBox>
+                    <Button Grid.Column="3" Grid.Row="0" Height="20" x:Name="Search" Width="80" Click="Search_Click"
+                            Content="Найти"
+                            />
+                    <Button Grid.Column="4" Grid.Row="0" Height="20" x:Name="ReportToFile" Width="80" Click="ReportToFile_Click"
+                            Content="Выгрузить"
+                    />
+                    <TextBox Grid.Row="1" Grid.Column="2" MaxHeight="30" x:Name="ReportTextFile">
+                        Введите название файла для отчета
+                    </TextBox>
+                    <DataGrid Grid.Row="2" Grid.ColumnSpan="5" x:Name="mainSearchTable" ItemsSource="{DynamicResource ResourceKey=phones}" IsReadOnly="True" AutoGenerateColumns="False">
+                        <DataGrid.Resources>
+                            
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Логин" Binding="{Binding Path=Login}" Width="90" />
+                            <DataGridTextColumn Header="Кол-во продаж" Binding="{Binding Path=CountOfSell}" Width="100" />
+                            <DataGridTextColumn Header="Рейтинг" Binding="{Binding Path=Rating}" Width="60" />
+                            <DataGridTextColumn Header="Название предмета" Binding="{Binding Path=Naming}" Width="150" />
+                            <DataGridTextColumn Header="Цена" Binding="{Binding Path=Price}" Width="100" />
+                            <DataGridTextColumn Header="Категория предмета" Binding="{Binding Path=Category}" Width="200" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+                    </TabItem>
+                    <TabItem Header="Отладка">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="4*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Row="0" Grid.Column="1" Height="30" Content="Отладить" x:Name="DebugTempStruct" Click="DebugTempStruct_Click"></Button>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugTempStructText" IsReadOnly="True" VerticalScrollBarVisibility="Auto"></TextBox>
+                            
+                            
+                        </Grid>
+                        
+                        
+                        
+                    </TabItem>
+                    
+                </TabControl>
+                
+                
+            </TabItem>
+            
+        </TabControl>
+        
+    </Grid>
+</Window>
