@@ -7,11 +7,11 @@ namespace Kurs_Project
         public static void AvlToFile(Avl tree, string FileOfTable2)
         {
             StreamWriter writer = new StreamWriter(FileOfTable2);
-            List<Table2> obj = new List<Table2>();
-            Avl.AvlToList(tree.Root, obj);
-            for (int i = 0; i < obj.Count; i++)
+            LinkedList<Table2> obj = new LinkedList<Table2>();
+            obj = tree.AvlToList();
+            foreach (var i in obj)
             {
-                writer.WriteLine($"{obj[i].Login};{obj[i].Naming};{obj[i].Price};{obj[i].Category}");
+                writer.WriteLine($"{i.Login};{i.Naming};{i.Price};{i.Category}");
             }
             writer.Close();
         }
@@ -27,13 +27,13 @@ namespace Kurs_Project
             writer.Close();
         }
 
-        public static void ReportToFile(List<ReportStruct> reportStruct, string FileOfTable3)
+        public static void ReportToFile(LinkedList<ReportStruct> reportStruct, string FileOfTable3)
         {
             StreamWriter writer = new StreamWriter(FileOfTable3);
-            for (int i = 0; i < reportStruct.Count; i++)
+            foreach (var i in reportStruct)
             {
-                writer.Write($"Логин - {reportStruct[i].Login}, Рейтинг продавца - {reportStruct[i].Rating}, Количество продаж - {reportStruct[i].CountOfSell}, ");
-                writer.WriteLine($"Наименование товара - {reportStruct[i].Naming}, Цена - {reportStruct[i].Price}, Категория - {reportStruct[i].Category}");
+                writer.Write($"Логин - {i.Login}, Рейтинг продавца - {i.Rating}, Количество продаж - {i.CountOfSell}, ");
+                writer.WriteLine($"Наименование товара - {i.Naming}, Цена - {i.Price}, Категория - {i.Category}");
             }
             writer.Close();
         }

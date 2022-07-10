@@ -1,151 +1,161 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Kurs_Project
 {
-    public class List<T> : IPrintable, ICloneableAs<List<T>>
-     {
-        private T[] _source;
- 
-    private void ThrowIfInvalid(int index)
+    
+    public class Node<T>
     {
-      if ((index < 0) || (index >= Count))
-      {
-        throw new IndexOutOfRangeException(nameof(index));
-      }
-    }
- 
-        private void TryResize()
+        public Node(T data)
         {
-            Count++;
-            if (_source.Length < Count)
-            {
-                Array.Resize(ref _source, _source.Length == 0 ? 1 : _source.Length + 1);
-            }
+            Data = data;
         }
- 
-    private void Insert(int index, T x)
+        public T Data { get; set; }
+        public Node<T> Next { get; set; }
+    }
+    
+    public class LinkedList<T> : IEnumerable<T>  // односвязный список
     {
-      TryResize();
-            for(var i = Count - 1; i > index; i--)
+        Node<T> _head; 
+        Node<T> _tail; 
+        int _count; 
+
+        
+        // добавление элемента
+        public void Add(T data)
+        {
+            Node<T> node = new Node<T>(data);
+ 
+            if (_head == null)
+                _head = node;
+            else
+                _tail.Next = node;
+            _tail = node;
+ 
+            _count++;
+        }
+        // удаление элемента
+        public bool Remove(T data)
+        {
+            Node<T> current = _head;
+            Node<T> previous = null;
+ 
+            while (current != null)
             {
-                _source[i] = _source[i - 1];
+                if (current.Data.Equals(data))
+                {
+                    // Если узел в середине или в конце
+                    if (previous != null)
+                    {
+                        // убираем узел current, теперь previous ссылается не на current, а на current.Next
+                        previous.Next = current.Next;
+ 
+                        // Если current.Next не установлен, значит узел последний,
+                        // изменяем переменную tail
+                        if (current.Next == null)
+                            _tail = previous;
+                    }
+                    else
+                    {
+                        // если удаляется первый элемент
+                        // переустанавливаем значение head
+                        _head = _head.Next;
+ 
+                        // если после удаления список пуст, сбрасываем tail
+                        if (_head == null)
+                            _tail = null;
+                    }
+                    _count--;
+                    return true;
+                }
+ 
+                previous = current;
+                current = current.Next;
             }
-            _source[index] = x;
-    }
- 
-    public T this[int i]
-    {
-      get
-      {
-        ThrowIfInvalid(i);
-        return _source[i];
-      }
-      set
-      {
-        ThrowIfInvalid(i);
-        _source[i] = value;
-      }
-    }
- 
-    public int Capacity => _source.Length;
-    public int Count { get; private set; }
- 
-    public List()
-    {
-      _source = new T[1];
-    }
- 
+            return false;
+        }
+
+        public T returnFirst()
+        {
+            return _head.Data;
+        }
+        
+        public int Count { get { return _count; } }
+        public bool IsEmpty { get { return _count == 0; } }
+        // очистка списка
+        public void Clear()
+        {
+            _head = null;
+            _tail = null;
+            _count = 0;
+        }
+        // содержит ли список элемент
+        public bool Contains(T data)
+        {
+            Node<T> current = _head;
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                    return true;
+                current = current.Next;
+            }
+            return false;
+        }
+        // добвление в начало
+        public void AppendFirst(T data)
+        {
+            Node<T> node = new Node<T>(data);
+            node.Next = _head;
+            _head = node;
+            if (_count == 0)
+                _tail = _head;
+            _count++;
+        }
+        // реализация интерфейса IEnumerable
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)this).GetEnumerator();
+        }
+
+        public T[] Getter()
+        {
+            T[] tempMas = new T[Count];
+            Node<T> temp = _head;
+            for(int i = 0; i < Count; i++)
+            {
+                tempMas[i] = temp.Data;
+                temp = temp.Next;
+            }
+            return tempMas;
+        }
+        
         public string GetStringRepresentation()
         {
             string representation = "[";
+            Node<T> temp = _head;
             for(var i = 0; i < Count; i++)
             {
-                representation += _source[i].ToString();
+                representation += temp.Data.ToString();
                 if (i < Count - 1)
                 {
                     representation += ", ";
                 }
+
+                temp = temp.Next;
             }
             representation += "]";
             return representation;
         }
- 
         
- 
-        public List<T> CloneAs()
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
-            List<T> list = new List<T>();
-            for(var i = 0; i < Count; i++)
+            Node<T> current = _head;
+            while (current != null)
             {
-                list.AddLast(_source[i]);
-            }
-            return list;
-        }
- 
-        public object Clone() => CloneAs();
-        
-
-    public int IndexOf(T x)
-    {
-      int i = 0;
-      while ((i < Count) && (!_source[i].Equals(x)))
-      {
-        i++;
-      }
-      if (i == Count)
-      {
-        return -1;
-      }
-      return i;
-    }
-
-    public void RemoveAt(int index)
-    {
-      ThrowIfInvalid(index);
-            for(var i = index; i < Count - 1; i++)
-            {
-                _source[i] = _source[i + 1];
-            }
-            _source[Count - 1] = default(T);
-            Count--;
-    }
-
-    public void AddListInList(List<T> target)
-    {
-        if (target.Capacity != 0)
-        {
-            for (int i = 0; i < target.Count; i++)
-            {
-                AddLast(target[i]);
+                yield return current.Data;
+                current = current.Next;
             }
         }
-        
     }
-
-    public T[] Getter()
-    {
-        T[] temp = new T[Count];
-        for (int i = 0; i < Count; i++)
-        {
-            temp[i] = _source[i];
-        }
-        return temp;
-    }
-    
-    public void AddFirst(T x) => Insert(0, x);
-    
-    public void AddLast(T x) => Insert(Count, x);
-    
-    public void Remove(T x) => RemoveAt(IndexOf(x));
-    
-  }
-
-  public interface IPrintable
-  {
-      string GetStringRepresentation();
-  }
-  public interface ICloneableAs<T> : ICloneable
-  {
-      T CloneAs();
-  }
 }
