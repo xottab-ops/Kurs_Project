@@ -113,7 +113,6 @@ namespace Kurs_Project
             LinkedList<Table2> listAvl = new LinkedList<Table2>();
             listAvl = AvlTree.AvlToList();
             Table2[] tab = listAvl.Getter();
-            
             SearchTable2.ItemsSource = tab;
         }
 

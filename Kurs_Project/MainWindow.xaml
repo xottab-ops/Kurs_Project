@@ -7,7 +7,7 @@
         xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
         mc:Ignorable="d"
         
-        Title="Курсовая работа" Height="360" Width="640" Icon="C:\Users\ХоТТабыЧ\RiderProjects\Kurs_Project\Kurs_Project\beer.ico">
+        Title="Курсовая работа" Height="360" Width="640">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -239,15 +239,10 @@
                             >
                                 200
                             </TextBox> 
-                            <ComboBox x:Name="CategorySearchAdd" Grid.Row="3" Grid.Column="1" Height="30">
-                                <TextBlock>Красный</TextBlock>
-                                <TextBlock>Оранжевый</TextBlock>
-                                <TextBlock>Жёлтый</TextBlock>
-                                <TextBlock>Зелёный</TextBlock>
-                                <TextBlock>Голубой</TextBlock>
-                                <TextBlock>Синий</TextBlock>
-                                <TextBlock>Фиолетовый</TextBlock>
-                            </ComboBox>
+                            <TextBox x:Name="CategorySearchAdd" Grid.Row="3" Grid.Column="1" Height="30">
+                                Красный
+                            </TextBox>
+                            
                             <Button Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Height="80" x:Name="AddingTo2" Width="60" Click="AddingTo2_Click"
                                     Content="Добавить"
                             />
@@ -302,15 +297,8 @@
                             >
                                 200
                             </TextBox> 
-                            <ComboBox x:Name="CategorySearchRemove" Grid.Row="3" Grid.Column="1" Height="30">
-                                <TextBlock>Красный</TextBlock>
-                                <TextBlock>Оранжевый</TextBlock>
-                                <TextBlock>Жёлтый</TextBlock>
-                                <TextBlock>Зелёный</TextBlock>
-                                <TextBlock>Голубой</TextBlock>
-                                <TextBlock>Синий</TextBlock>
-                                <TextBlock>Фиолетовый</TextBlock>
-                            </ComboBox>
+                            <TextBox x:Name="CategorySearchRemove" Grid.Row="3" Grid.Column="1" Height="30"></TextBox>
+                            
                             <Button Grid.Column="3" Grid.Row="0" Grid.RowSpan="4" Height="70" x:Name="RemoveTo2" Width="60" Click="RemoveTo2_Click"
                                     Content="Удалить"
                             />
@@ -381,15 +369,8 @@
                              >
                         5
                     </TextBox>  
-                    <ComboBox x:Name="CategorySearch" Grid.Row="0" Grid.Column="2" Height="20" Width="150">
-                        <TextBlock>Красный</TextBlock>
-                        <TextBlock>Оранжевый</TextBlock>
-                        <TextBlock>Жёлтый</TextBlock>
-                        <TextBlock>Зелёный</TextBlock>
-                        <TextBlock>Голубой</TextBlock>
-                        <TextBlock>Синий</TextBlock>
-                        <TextBlock>Фиолетовый</TextBlock>
-                    </ComboBox>
+                        <TextBox x:Name="CategorySearch" Grid.Row="0" Grid.Column="2" Height="20" Width="150"></TextBox>
+                    
                     <Button Grid.Column="3" Grid.Row="0" Height="20" x:Name="Search" Width="80" Click="Search_Click"
                             Content="Найти"
                             />
