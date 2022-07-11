@@ -148,11 +148,12 @@ namespace Kurs_Project
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
-                if (CategorySearchAdd.Text == "")
+                if (CategorySearchAdd.Text.Length is < 5 or > 100)
                 {
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
+                
                 Table2 temp = Inits.InitTable2(LoginTo2.Text, NamingOfObject.Text, k, CategorySearchAdd.Text);
                 AvlTree.Add(temp);
                 hashTable.ChangeCounts(LoginTo2.Text, 1);

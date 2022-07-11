@@ -139,7 +139,7 @@ namespace Kurs_Project
                 representation += temp.Data.ToString();
                 if (i < Count - 1)
                 {
-                    representation += ", ";
+                    representation += " -> ";
                 }
 
                 temp = temp.Next;
