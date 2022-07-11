@@ -180,7 +180,7 @@ namespace Kurs_Project
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
-                if (CategorySearchRemove.Text == "")
+                if (CategorySearchRemove.Text == "" || LoginTo2Remove.Text == "" || NamingOfObjectRemove.Text == "")
                 {
                     MessageBox.Show(errors.mistake4);
                     return;
@@ -194,7 +194,7 @@ namespace Kurs_Project
                     return;
                 }
                 AvlTree.Delete(tempDel);
-                hashTable.ChangeCounts(LoginTo2.Text, -1);
+                hashTable.ChangeCounts(LoginTo2Remove.Text, -1);
                 MessageBox.Show(errors.completeDelete);
                 return;
             }
