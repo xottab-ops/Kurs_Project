@@ -36,7 +36,7 @@ namespace Kurs_Project
             _count++;
         }
         // удаление элемента
-        public bool Remove(T data)
+        public void Remove(T data)
         {
             Node<T> current = _head;
             Node<T> previous = null;
@@ -67,13 +67,13 @@ namespace Kurs_Project
                             _tail = null;
                     }
                     _count--;
-                    return true;
+                    return;
                 }
  
                 previous = current;
                 current = current.Next;
             }
-            return false;
+            return;
         }
 
         public T returnFirst()
@@ -82,14 +82,7 @@ namespace Kurs_Project
         }
         
         public int Count { get { return _count; } }
-        public bool IsEmpty { get { return _count == 0; } }
-        // очистка списка
-        public void Clear()
-        {
-            _head = null;
-            _tail = null;
-            _count = 0;
-        }
+        
         // содержит ли список элемент
         public bool Contains(T data)
         {
@@ -102,16 +95,7 @@ namespace Kurs_Project
             }
             return false;
         }
-        // добвление в начало
-        public void AppendFirst(T data)
-        {
-            Node<T> node = new Node<T>(data);
-            node.Next = _head;
-            _head = node;
-            if (_count == 0)
-                _tail = _head;
-            _count++;
-        }
+
         // реализация интерфейса IEnumerable
         IEnumerator IEnumerable.GetEnumerator()
         {

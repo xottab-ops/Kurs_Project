@@ -122,6 +122,11 @@ namespace Kurs_Project
             DebugAvlText.Text = "";
             LinkedList<string> DisplayString = new LinkedList<string>();;
             DisplayString = AvlTree.Print();
+            if (DisplayString.Count == 0)
+            {
+                DebugAvlText.Text = "Дерево пустое";
+                return;
+            }
             foreach (var i in DisplayString)
             {
                 DebugAvlText.Text += i+"\r\n";

@@ -71,6 +71,10 @@ namespace Kurs_Project
         public LinkedList<string> Print()
         {
             LinkedList<string> tmp = new LinkedList<string>();
+            if (Root == null)
+            {
+                return tmp;
+            }
             Root.PrintPretty("", NodePosition.center, true, false, tmp);
             return tmp;
         }
@@ -271,29 +275,6 @@ namespace Kurs_Project
                     }
                     return new LinkedList<Table2>();
                 }
-                public LinkedList<string> DisplayTree()
-                {
-                    LinkedList<string> temp = new LinkedList<string>();
-                    if (Root == null)
-                    {
-                        string tempStr = "Дерево пустое";
-                        temp.Add(tempStr);
-                        return temp;
-                    }
-                    InOrderDisplayTree(Root, temp);
-                    return temp;
-                }
-                private void InOrderDisplayTree(Node current, LinkedList<string> stringing)
-                {
-                    if (current != null)
-                    {
-                        InOrderDisplayTree(current.Left, stringing);
-                        stringing.Add(current.Data.GetStringRepresentation());
-                        InOrderDisplayTree(current.Right, stringing);
-                    }
-                }
-                
-                
                 
                 public Node Find(string target, Node current)
                 {

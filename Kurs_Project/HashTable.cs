@@ -21,6 +21,15 @@
             }
             return -1;
         }
+        
+        public Hash(int size)
+        {
+            _k = Prime(size);
+            _sizeOfTable = size;
+            Capacity = 0;
+            _table = Init(_sizeOfTable);
+            _mainSize = size;
+        }
         private int HashFunction(string pat)
         {
             int temp = 0;
@@ -36,14 +45,7 @@
             return (hash1 + j * _k) % _sizeOfTable;
         }
         
-        public Hash(int size)
-        {
-            _k = Prime(size);
-            _sizeOfTable = size;
-            Capacity = 0;
-            _table = Init(_sizeOfTable);
-            _mainSize = size;
-        }
+        
 
         HashTableItem[] Init(int size)
         {
