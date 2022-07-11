@@ -334,7 +334,10 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Row="0" Grid.Column="1" Height="30" Content="Отладить" x:Name="DebugAvl" Click="DebugAvl_Click"></Button>
-                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugAvlText" IsReadOnly="True" VerticalScrollBarVisibility="Auto"></TextBox>
+                            <TextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugAvlText" IsReadOnly="True" VerticalScrollBarVisibility="Auto"
+                                     HorizontalScrollBarVisibility="Auto"
+                                     
+                                     ></TextBox>
                         </Grid>
                     </TabItem>
                 </TabControl>

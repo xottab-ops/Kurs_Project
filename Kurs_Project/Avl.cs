@@ -5,6 +5,12 @@ namespace Kurs_Project
 {
     public class Avl
     {
+        public enum NodePosition
+        {
+            left,
+            right,
+            center
+        }
         public class Node
         {
             public LinkedList<Table2> Data = new LinkedList<Table2>();
@@ -14,7 +20,61 @@ namespace Kurs_Project
             {
                 this.Data.Add(data);
             }
+            private string PrintValue(string value, NodePosition nodePostion)
+            {
+                switch (nodePostion)
+                {
+                    case NodePosition.left:
+                        return ($"L: {value}");
+                    case NodePosition.right:
+                        return ($"R: {value}");
+                    case NodePosition.center:
+                        return (value);
+                    default:
+                        return "0";
+                }
+            }
+            public void PrintPretty(string indent, NodePosition nodePosition, bool last, bool empty, LinkedList<string> str)
+            {
+                string temp = "";
+                temp += (indent);
+                if (last)
+                {
+                    temp += ("└─");
+                    indent += "  ";
+                }
+                else
+                {
+                    temp += ("├─");
+                    indent += "| ";
+                }
+
+                var stringValue = empty ? "-" : Data.GetStringRepresentation();
+                temp += empty ?  PrintValue("-", nodePosition): PrintValue(Data.GetStringRepresentation(), nodePosition);
+                str.Add(temp);
+                if(!empty && (this.Left != null || this.Right != null))
+                {
+                    if (this.Left != null)
+                        this.Left.PrintPretty(indent, NodePosition.left, false, false, str);
+                    else
+                        PrintPretty(indent, NodePosition.left, false, true, str);
+
+                    if (this.Right != null)
+                        this.Right.PrintPretty(indent, NodePosition.right, true, false, str);
+                    else
+                        PrintPretty(indent, NodePosition.right, true, true, str);
+                }
+            }
+            
         }
+        
+        public LinkedList<string> Print()
+        {
+            LinkedList<string> tmp = new LinkedList<string>();
+            Root.PrintPretty("", NodePosition.center, true, false, tmp);
+            return tmp;
+        }
+        
         
                 public Node Root;
                 public int Count = 0;
@@ -232,6 +292,9 @@ namespace Kurs_Project
                         InOrderDisplayTree(current.Right, stringing);
                     }
                 }
+                
+                
+                
                 public Node Find(string target, Node current)
                 {
                     if (current == null)

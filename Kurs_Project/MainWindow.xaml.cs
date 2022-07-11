@@ -34,6 +34,7 @@ namespace Kurs_Project
             else MessageBox.Show(errors.mistake1);
         }
 
+        
         public void SaveTable1_Click(object sender, RoutedEventArgs e)
         {
             if (helpAlgoritms.mask(TextBlockFile1.Text, 1))
@@ -120,7 +121,7 @@ namespace Kurs_Project
         {
             DebugAvlText.Text = "";
             LinkedList<string> DisplayString = new LinkedList<string>();;
-            DisplayString = AvlTree.DisplayTree();
+            DisplayString = AvlTree.Print();
             foreach (var i in DisplayString)
             {
                 DebugAvlText.Text += i+"\r\n";
