@@ -26,7 +26,7 @@
         public double Price { set; get; }
         public override string ToString()
         {
-            return Login + " " + Naming + " " + Price + " " + Category + "\r\n";
+            return Login + " " + Naming + " " + Price + " " + Category;
         }
         public static bool operator ==(Table2 obj1, Table2 obj2)
         {
