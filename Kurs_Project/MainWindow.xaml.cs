@@ -122,6 +122,11 @@ namespace Kurs_Project
             DebugAvlText.Text = "";
             LinkedList<string> DisplayString = new LinkedList<string>();;
             DisplayString = AvlTree.Print();
+            if (DisplayString.Count == 0)
+            {
+                DebugAvlText.Text = "Дерево пустое";
+                return;
+            }
             foreach (var i in DisplayString)
             {
                 DebugAvlText.Text += i+"\r\n";
@@ -148,11 +153,12 @@ namespace Kurs_Project
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
-                if (CategorySearchAdd.Text == "")
+                if (CategorySearchAdd.Text.Length is < 5 or > 100)
                 {
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
+                
                 Table2 temp = Inits.InitTable2(LoginTo2.Text, NamingOfObject.Text, k, CategorySearchAdd.Text);
                 AvlTree.Add(temp);
                 hashTable.ChangeCounts(LoginTo2.Text, 1);
@@ -174,7 +180,7 @@ namespace Kurs_Project
                     MessageBox.Show(errors.mistake2);
                     return;
                 }
-                if (CategorySearchRemove.Text == "")
+                if (CategorySearchRemove.Text == "" || LoginTo2Remove.Text == "" || NamingOfObjectRemove.Text == "")
                 {
                     MessageBox.Show(errors.mistake4);
                     return;
@@ -188,7 +194,7 @@ namespace Kurs_Project
                     return;
                 }
                 AvlTree.Delete(tempDel);
-                hashTable.ChangeCounts(LoginTo2.Text, -1);
+                hashTable.ChangeCounts(LoginTo2Remove.Text, -1);
                 MessageBox.Show(errors.completeDelete);
                 return;
             }
