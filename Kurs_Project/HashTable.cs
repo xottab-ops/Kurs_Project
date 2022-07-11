@@ -58,32 +58,20 @@
         public void Add(Table1 pat)
         {
             _pop = 0;
-            if (_sizeOfTable * 0.75 <= Capacity) {
+            if (_sizeOfTable * 0.75 < Capacity) {
                 Resize();
             }
-
-            if (Search(pat.Login) != -1)
+            int tempHash = SearchForAdding(pat.Login);
+            if (tempHash == -1)
             {
                 return;
             }
-            int tempHash = HashFunction(pat.Login);
-            if ((_table[tempHash].Status == 0) || (_table[tempHash].Status == 2)) {
+            else
+            {
                 _table[tempHash].Status = 1;
                 _table[tempHash].Value = pat;
                 Capacity++;
             }
-            else AddKolliz(pat, ++_pop, tempHash);
-        }
-
-        private void AddKolliz(Table1 pat, int pop, int hashKey)
-        {
-            int tempHash = (hashKey + pop * _k) % _sizeOfTable;
-            if ((_table[tempHash].Status == 0) || (_table[tempHash].Status == 2)) {
-                _table[tempHash].Status = 1;
-                _table[tempHash].Value = pat;
-                Capacity++;
-            }
-            else AddKolliz(pat, ++pop, hashKey);
         }
 
         private void Resize()
@@ -139,7 +127,44 @@
             {
                 return new Table1();
             }
-            else return _table[Search(key)].Value;
+            else return _table[k].Value;
+        }
+        
+        public int SearchForAdding(string pat)
+        {
+            int index = HashFunction(pat);
+            int secondIndex = index;
+            int i = 0, j = 0, returnCount = 0;
+            while (!(_table[secondIndex].Value.Login == pat && _table[secondIndex].Status == 1) && i < _sizeOfTable)
+            {
+                j++;
+                if (_table[secondIndex].Status == 0)
+                {
+                    return secondIndex;
+                }
+                if (_table[secondIndex].Status == 2)
+                {
+                    returnCount = secondIndex;
+                    break;
+                }
+                secondIndex = HashFunctuonTwo(index, j);
+                i++;
+            }
+            if (_table[secondIndex].Value.Login == pat && _table[secondIndex].Status == 1)
+            {
+                return -1;
+            }
+            while (i < _sizeOfTable)
+            {
+                j++;
+                if (_table[secondIndex].Value.Login == pat && _table[secondIndex].Status == 1)
+                {
+                    return -1;
+                }
+                secondIndex = HashFunctuonTwo(index, j);
+                i++;
+            }
+            return returnCount;
         }
         
         public int Search(string pat)
