@@ -158,7 +158,7 @@
                                 <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Row="0" Grid.Column="1" Height="30" Content="Отладить" x:Name="DebugHash" Click="DebugHash_Click"></Button>
-                            <TextBox TextAlignment="Center" VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugHashText" IsReadOnly="True"></TextBox>
+                            <TextBox TextAlignment='Left' VerticalScrollBarVisibility="Auto" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" x:Name="DebugHashText" IsReadOnly="True"></TextBox>
                     
                     
                         </Grid>

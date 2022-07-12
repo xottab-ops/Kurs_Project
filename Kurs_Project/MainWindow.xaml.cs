@@ -105,7 +105,11 @@ namespace Kurs_Project
             HashTableItem[] temp = hashTable.GetterPublic();
             for (int i = 0; i < hashTable.GetterSize(); i++)
             {
-                DebugHashText.Text += "Хеш = " + i + " " + temp[i].ToString()+"\r\n";
+                if (temp[i].Value.Login != null)
+                {
+                    DebugHashText.Text += ("Первичная хеш-функция = " + hashTable.HashFunction(temp[i].Value.Login) +" Хеш = " + i + " " + temp[i].ToString()+"\r\n");
+                }
+                else DebugHashText.Text += ("Первичная хеш-функция = " +" Хеш = " + i + " " + temp[i].ToString()+"\r\n");
             }
         }
         // АВЛ ДЕРЕВО РАБОТА С ДЕРЕВОМ

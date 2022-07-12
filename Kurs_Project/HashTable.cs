@@ -30,7 +30,7 @@
             _table = Init(_sizeOfTable);
             _mainSize = size;
         }
-        private int HashFunction(string pat)
+        public int HashFunction(string pat)
         {
             int temp = 0;
             foreach (var t in pat)

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+
 
 namespace Kurs_Project
 {
@@ -48,8 +48,7 @@ namespace Kurs_Project
                     temp += ("├─");
                     indent += "| ";
                 }
-
-                var stringValue = empty ? "-" : Data.GetStringRepresentation();
+                
                 temp += empty ?  PrintValue("-", nodePosition): PrintValue(Data.GetStringRepresentation(), nodePosition);
                 str.Add(temp);
                 if(!empty && (this.Left != null || this.Right != null))
@@ -272,7 +271,6 @@ namespace Kurs_Project
             {
                 return new LinkedList<Table2>();
             }
-            return new LinkedList<Table2>();
         }
         
         public Node Find(string target, Node current)
